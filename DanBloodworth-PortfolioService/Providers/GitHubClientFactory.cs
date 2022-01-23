@@ -16,8 +16,7 @@ namespace DanBloodworth_PortfolioService.Providers
 
         public IGitHubClient CreateClient(string apiKey)
         {
-            return new GitHubClient(new ProductHeaderValue(_options.Value.ApplicationName),
-                new Uri(_options.Value.ServerUrl))
+            return new GitHubClient(new ProductHeaderValue(_options.Value.ApplicationName))
             {
                 Credentials = new Credentials(apiKey)
             };
