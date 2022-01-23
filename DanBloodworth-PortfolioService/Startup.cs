@@ -1,4 +1,5 @@
-using DanBloodworth_PortfolioService.Services;
+using DanBloodworth_PortfolioService.Providers;
+using DanBloodworth_PortfolioService.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,8 +21,9 @@ namespace DanBloodworth_PortfolioService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IProjectService, ProjectService>();
-            
+            AddGitHubClientOptions(services);
+            AddGitHubClientFactory(services);
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -47,6 +49,16 @@ namespace DanBloodworth_PortfolioService
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        }
+
+        private void AddGitHubClientOptions(IServiceCollection services)
+        {
+            services.AddOptions<GitHubClientSettings>().Bind(Configuration.GetSection("GitHubClient"));
+        }
+
+        private void AddGitHubClientFactory(IServiceCollection services)
+        {
+            services.AddTransient<IGitHubClientFactory, GitHubClientFactory>();
         }
     }
 }
