@@ -1,14 +1,15 @@
-﻿using Octokit;
+﻿using DanBloodworth_PortfolioService.Providers;
+using Octokit;
 
 namespace DanBloodworth_PortfolioService.Services
 {
     public class ProjectService : IProjectService
     {
-        private readonly IGitHubClient _gitHubClient;
+        private readonly IGitHubClientFactory _gitHubClientFactory;
 
-        public ProjectService(IGitHubClient gitHubClient)
+        public ProjectService(IGitHubClientFactory gitHubClientFactory)
         {
-            _gitHubClient = gitHubClient;
+            _gitHubClientFactory = gitHubClientFactory;
         }
     }
 }
