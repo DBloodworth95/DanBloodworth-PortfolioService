@@ -22,7 +22,9 @@ namespace DanBloodworth_PortfolioService.Controllers
         [HttpGet("projects")]
         public async Task<IActionResult> Get()
         {
-            return Ok();
+            var repositories = await _projectService.GetGitHubRepositories("todo");
+            
+            return Ok(repositories);
         }
     }
 }
