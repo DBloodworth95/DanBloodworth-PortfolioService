@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using DanBloodworth_PortfolioService.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -23,6 +24,8 @@ namespace DanBloodworth_PortfolioService.Controllers
         public async Task<IActionResult> Get()
         {
             var repositories = await _projectService.GetGitHubRepositories("todo");
+            if (!repositories.Any())
+                return NotFound();
             
             return Ok(repositories);
         }
