@@ -25,6 +25,8 @@ namespace DanBloodworth_PortfolioService
             AddGitHubClientOptions(services);
             AddGitHubClientFactory(services);
             
+            AddProjectServiceOptions(services);
+            
             services.AddTransient<IProjectService, ProjectService>();
 
             services.AddControllers();
@@ -52,6 +54,11 @@ namespace DanBloodworth_PortfolioService
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        }
+
+        private void AddProjectServiceOptions(IServiceCollection services)
+        {
+            services.AddOptions<ProjectServiceSettings>().Bind(Configuration.GetSection("ApiAccess"));
         }
 
         private void AddGitHubClientOptions(IServiceCollection services)
