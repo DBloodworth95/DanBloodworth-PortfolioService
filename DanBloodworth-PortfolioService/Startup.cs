@@ -1,4 +1,5 @@
 using DanBloodworth_PortfolioService.Providers;
+using DanBloodworth_PortfolioService.Services;
 using DanBloodworth_PortfolioService.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,6 +24,8 @@ namespace DanBloodworth_PortfolioService
         {
             AddGitHubClientOptions(services);
             AddGitHubClientFactory(services);
+            
+            services.AddTransient<IProjectService, ProjectService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
