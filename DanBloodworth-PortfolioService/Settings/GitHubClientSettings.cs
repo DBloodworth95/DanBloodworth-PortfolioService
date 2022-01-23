@@ -5,10 +5,10 @@
         public string ServerUrl { get; set; }
         public string ApplicationName { get; set; }
 
-        public GitHubClientSettings(string serverUrl, string applicationName)
+        public GitHubClientSettings()
         {
-            ServerUrl = serverUrl;
-            ApplicationName = applicationName;
+            ServerUrl = "serverUrl";
+            ApplicationName = "applicationName";
         }
     }
 }
